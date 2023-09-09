@@ -1,0 +1,66 @@
+body {
+  min-height: 100vh;
+}
+
+#root {
+  height: 100vh;
+}
+
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.title {
+  color: #696969;
+}
+
+.brand-icon {
+  color: #FF7F50;
+  width: 25px;
+  height: 25px;
+}
+
+.station {
+  height: 2.5em;
+}
+
+.text-input {
+  word-break: break-all;
+}
+
+.station-list {
+  table-layout: fixed;
+}
+
+td {
+  word-wrap: break-word;
+}
+
+.playing {
+  background-color: #000000;
+  color: #00FA9A;
+}
+
+.green {
+  color: #00FA9A;
+}
+
+.red {
+  color: #FF4500;
+}
+
+.custom-modal {
+  color: #FFFFFF;
+  background-color: #212529;
+}
+
+.modal-content {
+  color: #FF00FF;
+  background-color: #000000;
+}
+
+.modal {
+  --bs-modal-bg: #212529;
+}
