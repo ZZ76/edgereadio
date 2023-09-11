@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
 
 export default function EditStationModal({id, name, url, tags, showModal, setShowModal = f => f}) {
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
     const [confirm, setConfirm] = useState(false);
     const nameRef = useRef();
     const urlRef = useRef();
@@ -30,7 +31,7 @@ export default function EditStationModal({id, name, url, tags, showModal, setSho
             })
         };
 
-        fetch("/api/setting/update", requestOptions)
+        fetch(`${API_ENDPOINT}/setting/update`, requestOptions)
             .then(handleClose)
             .catch(error => {
                 console.log(error);
@@ -45,7 +46,7 @@ export default function EditStationModal({id, name, url, tags, showModal, setSho
             body: JSON.stringify({id: id})
         };
 
-        fetch("/api/setting/remove", requestOptions)
+        fetch(`${API_ENDPOINT}/setting/remove`, requestOptions)
             .then(handleClose)
             .catch(error => {
                 console.log(error);

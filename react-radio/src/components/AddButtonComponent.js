@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 
 export default function AddButtonComponent() {
+    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
     const nameRef = useRef();
     const urlRef = useRef();
     const tagsRef = useRef();
@@ -30,7 +31,7 @@ export default function AddButtonComponent() {
                                   tags: tagsRef.current.value})
         };
 
-        fetch("/api/setting/add", requestOptions)
+        fetch(`${API_ENDPOINT}/setting/add`, requestOptions)
             .then(r => {
                 if (r.success) {
                     setEditing(false);
