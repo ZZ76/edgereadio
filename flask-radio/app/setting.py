@@ -14,7 +14,7 @@ def add_station():
         #print(request.json)
         info = request.json
         if '' in [info['name'], info['url']]:
-            raise
+            raise ValueError('Empty name or url')
         station = Station(name=info['name'],
                     url=info['url'],
                     tags=info['tags'])
@@ -31,6 +31,8 @@ def add_station():
 def update_station():
     try:
         info = request.json
+        if '' in [info['name'], info['url']]:
+            raise ValueError('Empty name or url')
         station = Station.query.filter_by(id=info['id']).first()
         station.name = info['name']
         station.url = info['url']
