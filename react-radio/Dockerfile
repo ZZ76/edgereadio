@@ -5,7 +5,7 @@
 # load:
 # docker load --input react-radio-arm.tar
 # run:
-# Docker run --rm -d -p 80:80 react-radio-arm
+# docker run --rm -d -p 80:80 react-radio-arm
 #
 # amd64
 #FROM nginx:1.19
