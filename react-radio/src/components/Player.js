@@ -20,7 +20,7 @@ export default function Player() {
     }, [currentStation.volume])
 
     const play = () => {
-        if (currentStation == undefined) {
+        if (currentStation === undefined) {
             return
         }
 
@@ -73,7 +73,7 @@ export default function Player() {
                     <Col xs={10}>
                         <Form.Range className="align-middle"
                                     onInput={e => updateVolume(e.target.value)}
-                                    value={volume}
+                                    value={tempVolume}
                                     min="0"
                                     max="100"
                                     step="1"/>
@@ -85,14 +85,15 @@ export default function Player() {
 
     return (
         <>
-            <Container className="border-0 flex-nowrap align-items-center justify-content-center player" fluid="xs">
-                <Row className="w-100 text-center flex-nowrap align-items-center justify-content-center">
+            <Container className="border-0 flex-nowrap align-items-center justify-content-center" fluid="xs">
+                <Row className="w-100 text-center flex-nowrap align-items-center justify-content-center player">
                     <Col xs={0} sm={3}>
                     </Col>
-                    <Col xs={2} sm={1}>
-                        {playingNow.id != undefined ?
+                    <Col xs={4} sm={1}>
+                        {playingNow.id !== undefined ?
                          <Button variant="custom"
-                                 className="align-middle"
+                                 size="lg"
+                                 className="align-middle btn-lg"
                                  onMouseEnter={() => setHoverPlay(true)}
                                  onMouseLeave={() => setHoverPlay(false)}
                                  onClick={stop}>
@@ -102,6 +103,7 @@ export default function Player() {
                           }
                          </Button> :
                          <Button variant="custom"
+                                 size="lg"
                                  className="align-middle"
                                  onMouseEnter={() => setHoverPlay(true)}
                                  onMouseLeave={() => setHoverPlay(false)}
@@ -113,9 +115,12 @@ export default function Player() {
                          </Button>
                         }
                     </Col>
-                    <Col xs={10} sm={5}>
+                    <Col xs={8} sm={5}>
                         <Row className="border-0 d-flex align-items-center justify-content-center">
                             {currentStation.title || "- -"}
+                        </Row>
+                        <Row>
+                            <p></p>
                         </Row>
                         <Volume />
                     </Col>
