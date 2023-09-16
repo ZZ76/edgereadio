@@ -8,19 +8,19 @@
 
 ### Build docker image
 
-### build the app:
+build the app:
 ### `npm run build`
 
-### build:
+build docker image:
 ### `docker build -t react-radio-arm .`
 
-### export:
+export:
 ### `docker save --output react-radio-arm.tar react-radio-arm`
 
-### load:
+load:
 ### `docker load --input react-radio-arm.tar`
 
-### run:
+run:
 ### `docker run --rm -d -p 80:80 react-radio-arm`
 
 
