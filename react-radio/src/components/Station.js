@@ -23,7 +23,7 @@ export default function Station({id, name, url, tags}) {
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({id: id, url: url})
+            body: JSON.stringify({id: id, title: name, url: url})
         };
 
         fetch(`${API_ENDPOINT}/play`, requestOptions)

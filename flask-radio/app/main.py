@@ -7,6 +7,7 @@ from flask_socketio import emit
 from . import socketio
 from .radio_vlc import Radio
 from .models import Station
+import time
 
 main = Blueprint('main', __name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -22,14 +23,17 @@ def play():
     try:
         info = request.json
         _id = info['id']
+        title = info['title']
         url = info['url']
-        r.station = {"id": _id, "url": url}
+        r.station = {"id": _id, "title": title, "url": url}
         r.play()
         socketio.emit("onReceivePlayingNow", r.station)
+        socketio.emit("onReceiveCurrentStation", r.station)
         return jsonify(success=True)
     except Exception as e:
         print('error:', e)
         socketio.emit("onReceivePlayingNow", {})
+        socketio.emit("onReceiveCurrentStation", {})
         return jsonify(success=False)
 
 @main.route('/stop', methods=['GET'])
@@ -41,6 +45,19 @@ def stop():
         return jsonify(success=True)
     except Exception as e:
         print('error:', e)
+        return jsonify(success=False)
+
+@main.route('/set-volume', methods=['POST'])
+def set_volume():
+    try:
+        info = request.json
+        r.volume = int(info['volume'])
+        time.sleep(0.1)
+        socketio.emit("onReceiveCurrentStation", r.station)
+        return jsonify(success=True)
+    except Exception as e:
+        print('error:', e)
+        socketio.emit("onReceiveCurrentStation", r.station)
         return jsonify(success=False)
 
 @main.route('/stations', methods=['GET'])
@@ -75,6 +92,10 @@ def playing_now():
         emit("onReceivePlayingNow", r.station)
     else:
         emit("onReceivePlayingNow", {})
+
+@socketio.on('current station')
+def current_station():
+    emit('onReceiveCurrentStation', r.station)
 
 def get_all_stations():
     stations = Station.query.all()

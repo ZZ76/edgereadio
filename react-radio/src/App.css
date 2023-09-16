@@ -38,6 +38,13 @@ td {
   word-wrap: break-word;
 }
 
+.player-paused {
+}
+
+.player-playing {
+  color: #00FA9A;
+}
+
 .playing {
   background-color: #000000;
   color: #00FA9A;
@@ -63,4 +70,8 @@ td {
 
 .modal {
   --bs-modal-bg: #212529;
+}
+
+.player {
+  height: 80px;
 }

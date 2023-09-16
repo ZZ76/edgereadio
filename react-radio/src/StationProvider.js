@@ -6,7 +6,8 @@ export const useStationData = () => useContext(StationContext);
 export default function StationProvider ({children, socket}) {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [stations, setStations] = useState({stations: []});
-    const [playingNow, setPlayingNow] = useState({playing: null});
+    const [playingNow, setPlayingNow] = useState({});
+    const [currentStation, setCurrentStation] = useState({});
 
     useEffect(() => {
         function onConnect() {
@@ -24,12 +25,17 @@ export default function StationProvider ({children, socket}) {
         function onReceivePlayingNow(msg) {
             setPlayingNow(msg);
         }
+        function onReceiveCurrentStation(msg) {
+            setCurrentStation(msg);
+        }
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisConnect);
         socket.on("onReceiveStations", onReceiveStations);
         socket.on("onReceivePlayingNow", onReceivePlayingNow);
+        socket.on("onReceiveCurrentStation", onReceiveCurrentStation);
         socket.emit("all stations");
         socket.emit("playing now");
+        socket.emit("current station");
 
         return () => {
             socket.off("connect", onConnect);
@@ -39,7 +45,7 @@ export default function StationProvider ({children, socket}) {
     }, []);
 
     return (
-        <StationContext.Provider value={{isConnected, stations, playingNow}}>
+        <StationContext.Provider value={{isConnected, stations, playingNow, currentStation}}>
             {children}
         </StationContext.Provider>
     )

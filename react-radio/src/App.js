@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import StationList from "./components/StationList.js";
 import NavbarCustom from './components/Navbar.js';
 
+import Player from "./components/Player";
+
 function App() {
 
   return (
@@ -18,6 +20,9 @@ function App() {
       </div>
       <div style={{"height": "100%", "width": "100%"}}>
         <Container className="text-bg-dark" style={{"height": "100%", "maxWidth": "100%"}}>
+          <Row>
+            <Player />
+          </Row>
           <Row>
             <Col xs={"auto"}>
             </Col>

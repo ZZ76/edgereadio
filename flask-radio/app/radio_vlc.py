@@ -8,11 +8,12 @@ class Radio:
 
     def __init__(self):
         self.__isplaying = False
-        self.__url = None
+        self.__url = ''
         self.__instance = vlc.Instance('--input-repeat=-1', '--fullscreen')
         self.__player = self.__instance.media_player_new()
         self.__media = None
         self.__id = None
+        self.__title = ''
 
     @property
     def url(self):
@@ -24,11 +25,20 @@ class Radio:
 
     @property
     def station(self):
-        return {"id": self.__id, "url": self.__url}
+        return {"id": self.__id, "title": self.__title, "url": self.__url, "volume": self.volume}
+
+    @property
+    def volume(self):
+        try:
+            return self.__player.audio_get_volume()
+        except Exception as e:
+            print('error:', e)
+            return 0
 
     @station.setter
     def station(self, station: dict):
         self.__id = station["id"]
+        self.__title = station["title"]
         self.__url = station["url"]
 
     @url.setter
@@ -41,6 +51,10 @@ class Radio:
         if self.__isplaying:
             self.__player.stop()
             self.play()
+
+    @volume.setter
+    def volume(self, v: int):
+        return self.__player.audio_set_volume(v)
 
     def play(self):
         '''
