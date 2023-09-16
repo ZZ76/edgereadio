@@ -1,3 +1,4 @@
+# change socketio url to production in index.js before build
 # build:
 # docker build -t react-radio-arm .
 # export:

@@ -25,6 +25,8 @@ def play():
         _id = info['id']
         title = info['title']
         url = info['url']
+        if '' in [title, url]:
+            raise ValueError('Empty name or url')
         r.station = {"id": _id, "title": title, "url": url}
         r.play()
         socketio.emit("onReceivePlayingNow", r.station)

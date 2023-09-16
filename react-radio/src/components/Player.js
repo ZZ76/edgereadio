@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 import { useStationData } from "../StationProvider";
-import { FaPlay, FaPause, FaVolumeOff } from "react-icons/fa";
+import { FaPlay, FaPause, FaVolumeMute, FaVolumeOff, FaVolumeDown, FaVolumeUp } from "react-icons/fa";
 
 export default function Player() {
     const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
@@ -63,12 +63,25 @@ export default function Player() {
           .finally(() => {})
     }
 
+    const VolumeIcon = () => {
+        { if (volume === 0) {
+            return <FaVolumeMute/>
+        } else if (volume <= 33) {
+            return <FaVolumeOff/>
+        } else if (volume > 33 && volume <= 66) {
+            return <FaVolumeDown/>
+        } else {
+            return <FaVolumeUp/>
+        }
+        }
+    }
+
     const Volume = () => {
         return (
             <>
                 <Row className="flex-nowrap">
                     <Col xs={2}>
-                        <FaVolumeOff/>
+                        <VolumeIcon/>
                     </Col>
                     <Col xs={10}>
                         <Form.Range className="align-middle"
@@ -90,7 +103,7 @@ export default function Player() {
                     <Col xs={0} sm={3}>
                     </Col>
                     <Col xs={4} sm={1}>
-                        {playingNow.id !== undefined ?
+                        {(playingNow.id !== undefined && playingNow.id !== null) ?
                          <Button variant="custom"
                                  size="lg"
                                  className="align-middle btn-lg"
