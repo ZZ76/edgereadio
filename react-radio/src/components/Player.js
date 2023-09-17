@@ -47,6 +47,11 @@ export default function Player() {
           .finally(() => {})
     }
 
+    const mute = () => {
+        setTempVolume(0);
+        updateVolume(0);
+    }
+
     const updateVolume = (v) => {
         setTempVolume(v);
         const requestOptions = {
@@ -65,7 +70,7 @@ export default function Player() {
 
     const VolumeIcon = () => {
         { if (volume === 0) {
-            return <FaVolumeMute/>
+            return <FaVolumeMute className="red"/>
         } else if (volume <= 33) {
             return <FaVolumeOff/>
         } else if (volume > 33 && volume <= 66) {
@@ -81,15 +86,22 @@ export default function Player() {
             <>
                 <Row className="flex-nowrap">
                     <Col xs={2}>
-                        <VolumeIcon/>
+                        <Button variant="dark" onClick={mute}>
+                            <VolumeIcon/>
+                        </Button>
                     </Col>
-                    <Col xs={10}>
-                        <Form.Range className="align-middle"
-                                    onInput={e => updateVolume(e.target.value)}
-                                    value={tempVolume}
-                                    min="0"
-                                    max="100"
-                                    step="1"/>
+                    <Col xs={1}>
+                    </Col>
+                    <Col xs={9} style={{"position":"relative"}}>
+                        <input type="range"
+                               id="volume-range"
+                               className="align-middle"
+                               onInput={e => updateVolume(e.target.value)}
+                               value={tempVolume}
+                               style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempVolume + "%, #fff " + tempVolume + "%, white 100%)"}}
+                               min="0"
+                               max="100"
+                               step="1"/>
                     </Col>
                 </Row>
             </>
