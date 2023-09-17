@@ -8,6 +8,7 @@
 
 ### Build docker image
 
+In `react-radio` directory 
 build the app:
 ### `npm run build`
 

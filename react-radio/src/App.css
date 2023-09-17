@@ -2,6 +2,10 @@ body {
   min-height: 100vh;
 }
 
+#list-holder {
+  background-color: #212529;
+}
+
 #root {
   height: 100vh;
 }
@@ -14,6 +18,9 @@ body {
 
 .title {
   color: #696969;
+  background-color: #212529;
+  position: sticky;
+  top: 157px;
 }
 
 .brand-icon {
@@ -74,6 +81,23 @@ td {
 
 .modal {
   --bs-modal-bg: #212529;
+}
+
+#navbar-holder {
+  position: sticky;
+  top: 0px;
+}
+
+#player-holder {
+  background-color: #212529;
+  position: sticky;
+  top: 56px;
+  border-top: 1px;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-color: #2c3237;
+  border-style: solid;
 }
 
 .player {

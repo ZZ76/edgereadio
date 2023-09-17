@@ -15,15 +15,15 @@ function App() {
 
   return (
     <div data-bs-theme="dark" className="App">
-      <div>
+      <div id="navbar-holder">
         <NavbarCustom/>
       </div>
       <div style={{"height": "100%", "width": "100%"}}>
         <Container className="text-bg-dark" style={{"height": "100%", "maxWidth": "100%"}}>
-          <Row>
+          <Row id="player-holder">
             <Player />
           </Row>
-          <Row>
+          <Row id="list-holder">
             <Col xs={"auto"}>
             </Col>
             <StationList />
