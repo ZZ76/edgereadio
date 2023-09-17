@@ -81,18 +81,47 @@ export default function Player() {
         }
     }
 
+    const PlayButton = () => {
+        return(
+            <>
+                {(playingNow.id !== undefined && playingNow.id !== null) ?
+                 <Button variant="custom"
+                         size="lg"
+                         className="align-middle btn-lg"
+                         onMouseEnter={() => setHoverPlay(true)}
+                         onMouseLeave={() => setHoverPlay(false)}
+                         onClick={stop}>
+                     {!hoverPlay ?
+                      <FaPause className="player-playing"/>:
+                      <FaPause className="player-paused"/>
+                     }
+                 </Button> :
+                 <Button variant="custom"
+                         size="lg"
+                         className="align-middle"
+                         onMouseEnter={() => setHoverPlay(true)}
+                         onMouseLeave={() => setHoverPlay(false)}
+                         onClick={play}>
+                     {!hoverPlay ?
+                      <FaPlay className="player-paused"/> :
+                      <FaPlay className="player-playing"/>
+                     }
+                 </Button>
+                }
+            </>
+        )
+    }
+
     const Volume = () => {
         return (
             <>
                 <Row className="flex-nowrap">
                     <Col xs={2}>
-                        <Button variant="dark" onClick={mute}>
+                        <Button id="volume-button" variant="dark" onClick={mute} size="sm">
                             <VolumeIcon/>
                         </Button>
                     </Col>
-                    <Col xs={1}>
-                    </Col>
-                    <Col xs={9} style={{"position":"relative"}}>
+                    <Col xs={10} style={{"position":"relative"}}>
                         <input type="range"
                                id="volume-range"
                                className="align-middle"
@@ -114,38 +143,25 @@ export default function Player() {
                 <Row className="w-100 text-center flex-nowrap align-items-center justify-content-center player">
                     <Col xs={0} sm={3}>
                     </Col>
-                    <Col xs={4} sm={1}>
-                        {(playingNow.id !== undefined && playingNow.id !== null) ?
-                         <Button variant="custom"
-                                 size="lg"
-                                 className="align-middle btn-lg"
-                                 onMouseEnter={() => setHoverPlay(true)}
-                                 onMouseLeave={() => setHoverPlay(false)}
-                                 onClick={stop}>
-                          {!hoverPlay ?
-                           <FaPause className="player-playing"/>:
-                           <FaPause className="player-paused"/>
-                          }
-                         </Button> :
-                         <Button variant="custom"
-                                 size="lg"
-                                 className="align-middle"
-                                 onMouseEnter={() => setHoverPlay(true)}
-                                 onMouseLeave={() => setHoverPlay(false)}
-                                 onClick={play}>
-                          {!hoverPlay ?
-                           <FaPlay className="player-paused"/> :
-                           <FaPlay className="player-playing"/>
-                          }
-                         </Button>
-                        }
-                    </Col>
-                    <Col xs={8} sm={5}>
-                        <Row className="border-0 d-flex align-items-center justify-content-center">
-                            {currentStation.title || "- -"}
-                        </Row>
+                    <Col xs={12} sm={5}>
                         <Row>
                             <p></p>
+                        </Row>
+                        <Row>
+                            <Col xs={2}>
+                                <PlayButton/>
+                            </Col>
+                            <Col xs={10}>
+                                <Row>
+                                    <p></p>
+                                </Row>
+                                <Row className="border-0 d-flex align-items-center justify-content-center">
+                                    {currentStation.title || "- -"}
+                                </Row>
+                                <Row>
+                                    <p></p>
+                                </Row>
+                            </Col>
                         </Row>
                         <Volume />
                     </Col>

@@ -104,6 +104,12 @@ td {
   height: 100px;
 }
 
+#volume-button {
+  padding: 4px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 #volume-range {
   width: 100%;
   appearance: auto;
