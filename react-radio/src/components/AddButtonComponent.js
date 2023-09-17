@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function AddButtonComponent() {
     const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-    const nameRef = useRef();
+    const titleRef = useRef();
     const urlRef = useRef();
     const tagsRef = useRef();
     const [editing, setEditing] = useState(false); // edit station info
@@ -26,7 +26,7 @@ export default function AddButtonComponent() {
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({name: nameRef.current.value,
+            body: JSON.stringify({name: titleRef.current.value,
                                   url: urlRef.current.value,
                                   tags: tagsRef.current.value})
         };
@@ -66,8 +66,8 @@ export default function AddButtonComponent() {
                     >
                     <Container variant="dark" data-bs-theme="dark">
                     <Row>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control ref={nameRef} type="text" placeholder="Name"/>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control ref={titleRef} type="text" placeholder="Title"/>
                     </Row>
                     <Row>
                         <Form.Label>Tags</Form.Label>

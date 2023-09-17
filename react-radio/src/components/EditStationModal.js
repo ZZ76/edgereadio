@@ -10,7 +10,7 @@ import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
 export default function EditStationModal({id, name, url, tags, showModal, setShowModal = f => f}) {
     const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
     const [confirm, setConfirm] = useState(false);
-    const nameRef = useRef();
+    const titleRef = useRef();
     const urlRef = useRef();
     const tagsRef = useRef();
 
@@ -25,7 +25,7 @@ export default function EditStationModal({id, name, url, tags, showModal, setSho
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 id: id,
-                name: nameRef.current.value,
+                name: titleRef.current.value,
                 url: urlRef.current.value,
                 tags: tagsRef.current.value
             })
@@ -110,8 +110,8 @@ export default function EditStationModal({id, name, url, tags, showModal, setSho
                     >
                     <Container variant="dark" data-bs-theme="dark">
                     <Row>
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control ref={nameRef} type="text" placeholder="Name" defaultValue={name}/>
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control ref={titleRef} type="text" placeholder="Title" defaultValue={name}/>
                     </Row>
                     <Row>
                         <Form.Label>Tags</Form.Label>

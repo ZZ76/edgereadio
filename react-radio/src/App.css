@@ -85,7 +85,7 @@ td {
   appearance: auto;
   accent-color: MediumSpringGreen;
   border-radius: 8px;
-  background: linear-gradient(to right, #00FA9A 0%, #00FA9A 50%, #fff 50%, #fff 100%);
+  background: linear-gradient(to right, #00FA9A 0%, #00FA9A 100%);
   border-radius: 8px;
   -webkit-appearance: none;
   margin: 0;
