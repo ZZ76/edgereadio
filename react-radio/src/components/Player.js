@@ -98,7 +98,7 @@ export default function Player() {
                                className="align-middle"
                                onInput={e => updateVolume(e.target.value)}
                                value={tempVolume}
-                               style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempVolume + "%, #fff " + tempVolume + "%, white 100%)"}}
+                               style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempVolume + "%, #2b3035 " + tempVolume + "%, #2b3035 100%)"}}
                                min="0"
                                max="100"
                                step="1"/>
