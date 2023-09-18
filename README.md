@@ -1,2 +1,2 @@
 # edgereadio
-Receive and play internet radios. Managed via browser.
+Play internet radios on edge device e.g. raspberry pi. Managed via browser.
