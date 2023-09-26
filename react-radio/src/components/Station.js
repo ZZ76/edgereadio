@@ -43,6 +43,18 @@ export default function Station({id, name, url, tags}) {
           .finally(() => {})
     }
 
+    const rowClass = () => {
+        if (playingNow.id === id) {
+            return "align-items-center station playing"
+        } else {
+            if (isShown === false) {
+                return "align-items-center station"
+            } else {
+                return "align-items-center station hover"
+            }
+        }
+    }
+
     const setting = () => {
         return (
             <>
@@ -63,9 +75,7 @@ export default function Station({id, name, url, tags}) {
 
     return (
         <>
-            <Row className={playingNow.id === id ?
-                            "align-items-center station playing" :
-                            "align-items-center station"}
+            <Row className={rowClass()}
                  onMouseEnter={() => setIsShown(true)}
                  onMouseLeave={() => setIsShown(false)}>
                 <Col xs={0} md={2}>
