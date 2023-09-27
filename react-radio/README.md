@@ -2,7 +2,7 @@
 ## Build the app in docker
 
 ### Before build
-1. Edit `REACT_APP_API_ENDPOINT` in `.env.prudoction`
+1. Edit `REACT_APP_API_ENDPOINT` in `.env.prudoction`. Using ip address e.g. `http://192.168.1.2:5000` instead using `localhost`.
 2. Edit socketio url to production in `index.js` which is same with `REACT_APP_API_ENDPOINT` in this case.
 3. Select the suitable base docker image for nginx and set in `Dockerfile`
 
