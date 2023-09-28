@@ -1,28 +1,37 @@
+# Build the app in docker
 
-## Build the app in docker
-
-### Before build
+## Before build
 1. Edit `REACT_APP_API_ENDPOINT` in `.env.prudoction`. Using ip address e.g. `http://192.168.1.2:5000` instead using `localhost`.
 2. Edit socketio url to production in `index.js` which is same with `REACT_APP_API_ENDPOINT` in this case.
 3. Select the suitable base docker image for nginx and set in `Dockerfile`
 
-### Build docker image
+## Build docker image
 
 In `react-radio` directory 
-build the app:
-### `npm run build`
+build the app, run:
+```
+$ npm run build
+```
 
 build docker image:
-### `docker build -t react-radio-arm .`
+```
+$ docker build -t react-radio-arm .
+```
 
-export:
-### `docker save --output react-radio-arm.tar react-radio-arm`
+export image:
+```
+$ docker save --output react-radio-arm.tar react-radio-arm
+```
 
-load:
-### `docker load --input react-radio-arm.tar`
+load image:
+```
+$ docker load --input react-radio-arm.tar
+```
 
-run:
-### `docker run --rm -d -p 80:80 react-radio-arm`
+run image:
+```
+$ docker run --rm -d -p 80:80 react-radio-arm
+```
 
 
 # Getting Started with Create React App
