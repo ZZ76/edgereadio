@@ -9,13 +9,9 @@ import StationProvider from "./StationProvider";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-// Development:
-const socket = io("/", {
-  transport:['websocket', 'polling'],
-  path: `${API_ENDPOINT}/socket.io`
-});
-// Production:
-//const socket = io(`${API_ENDPOINT}`);
+const SOCKETIO_ENDPOINT = process.env.REACT_APP_SOCKETIO_ENDPOINT
+
+const socket = io(SOCKETIO_ENDPOINT);
 
 root.render(
   <React.StrictMode>
