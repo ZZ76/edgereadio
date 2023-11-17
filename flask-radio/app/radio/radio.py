@@ -4,21 +4,21 @@ from flask import Flask, Blueprint, jsonify, request
 #from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import emit
-from . import socketio
+from .. import socketio
 from .radio_vlc import Radio
 from .models import Station
 import time
+from . import radio_api
 
-main = Blueprint('main', __name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 r = Radio()
-#CORS(app, supports_credentials=True)
+#CORS(radio, supports_credentials=True)
 
-@main.route('/')
+@radio_api.route('/')
 def index():
     return '<html><p>Hello from Radio!</p></html>'
 
-@main.route('/play', methods=['POST'])
+@radio_api.route('/play', methods=['POST'])
 def play():
     try:
         info = request.json
@@ -27,7 +27,7 @@ def play():
         url = info['url']
         if '' in [title, url]:
             raise ValueError('Empty name or url')
-        r.station = {"id": _id, "title": title, "url": url}
+        r.station = {"id": _id, "title": title, "url": url, "volume": r.volume}
         r.play()
         socketio.emit("onReceivePlayingNow", r.station)
         socketio.emit("onReceiveCurrentStation", r.station)
@@ -38,7 +38,7 @@ def play():
         socketio.emit("onReceiveCurrentStation", {})
         return jsonify(success=False)
 
-@main.route('/stop', methods=['GET'])
+@radio_api.route('/stop', methods=['GET'])
 def stop():
     try:
         if r.isplaying:
@@ -49,7 +49,7 @@ def stop():
         print('error:', e)
         return jsonify(success=False)
 
-@main.route('/set-volume', methods=['POST'])
+@radio_api.route('/set-volume', methods=['POST'])
 def set_volume():
     try:
         info = request.json
@@ -62,7 +62,7 @@ def set_volume():
         socketio.emit("onReceiveCurrentStation", r.station)
         return jsonify(success=False)
 
-@main.route('/stations', methods=['GET'])
+@radio_api.route('/stations', methods=['GET'])
 def stations():
     '''
     return all stations from db

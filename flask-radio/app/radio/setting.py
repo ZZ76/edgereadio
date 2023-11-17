@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 from flask import Blueprint, request, jsonify
-from . import socketio
+from .. import socketio
 from .models import Station
-from . import db
-from .main import get_all_stations
+from .. import db
+from .radio import get_all_stations
 import time
 
 setting = Blueprint('setting', __name__)

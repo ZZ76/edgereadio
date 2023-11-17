@@ -8,7 +8,7 @@ import { useStationData } from "../StationProvider";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeOff, FaVolumeDown, FaVolumeUp } from "react-icons/fa";
 
 export default function Player() {
-    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+    const RADIO_ENDPOINT = process.env.REACT_APP_RADIO_ENDPOINT
     const {playingNow, currentStation} = useStationData();
     const [hoverPlay, setHoverPlay] = useState(false)
     const [volume, setVolume] = useState(0)
@@ -30,7 +30,7 @@ export default function Player() {
             body: JSON.stringify({id: currentStation.id, title: currentStation.title, url: currentStation.url})
         };
 
-        fetch(`${API_ENDPOINT}/play`, requestOptions)
+        fetch(`${RADIO_ENDPOINT}/play`, requestOptions)
             .then(r => {})
             .catch(error => {
                 console.log(error);
@@ -39,7 +39,7 @@ export default function Player() {
     }
 
     const stop = () => {
-        fetch(`${API_ENDPOINT}/stop`)
+        fetch(`${RADIO_ENDPOINT}/stop`)
             .then(r => {})
             .catch(error => {
                 console.log(error);
@@ -60,7 +60,7 @@ export default function Player() {
             body: JSON.stringify({volume: v})
         };
 
-        fetch(`${API_ENDPOINT}/set-volume`, requestOptions)
+        fetch(`${RADIO_ENDPOINT}/set-volume`, requestOptions)
             .then(setVolume(v))
             .catch(error => {
                 console.log(error);

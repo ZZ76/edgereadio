@@ -19,10 +19,10 @@ def create_app(config_name):
     db.init_app(app)
     socketio.init_app(app)
 
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    from .radio import radio_api as radio_blueprint
+    app.register_blueprint(radio_blueprint, url_prefix='/api/radio')
 
-    from .setting import setting as setting_blueprint
-    app.register_blueprint(setting_blueprint, url_prefix='/setting')
+    #from .setting import setting as setting_blueprint
+    #app.register_blueprint(setting_blueprint, url_prefix='/setting')
 
     return app

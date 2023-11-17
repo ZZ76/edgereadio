@@ -7,7 +7,7 @@ import { useStationData } from "../StationProvider";
 import EditStationModal from "./EditStationModal";
 
 export default function Station({id, name, url, tags}) {
-    const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+    const RADIO_ENDPOINT = process.env.REACT_APP_RADIO_ENDPOINT
     const {playingNow} = useStationData();
     const [isShown, setIsShown] = useState(false)
     const [hoverPlay, setHoverPlay] = useState(false)
@@ -26,7 +26,7 @@ export default function Station({id, name, url, tags}) {
             body: JSON.stringify({id: id, title: name, url: url})
         };
 
-        fetch(`${API_ENDPOINT}/play`, requestOptions)
+        fetch(`${RADIO_ENDPOINT}/play`, requestOptions)
             .then(r => {})
             .catch(error => {
                 console.log(error);
@@ -35,7 +35,7 @@ export default function Station({id, name, url, tags}) {
     }
 
     const stop = () => {
-        fetch(`${API_ENDPOINT}/stop`)
+        fetch(`${RADIO_ENDPOINT}/stop`)
             .then(r => {})
             .catch(error => {
                 console.log(error);

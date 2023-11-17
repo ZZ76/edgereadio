@@ -8,7 +8,6 @@ import StationProvider from "./StationProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 const SOCKETIO_ENDPOINT = process.env.REACT_APP_SOCKETIO_ENDPOINT
 
 const socket = io(SOCKETIO_ENDPOINT);

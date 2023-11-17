@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from . import db
+from .. import db
 
 class Station(db.Model):
     __tablename__ = 'stations'

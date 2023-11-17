@@ -11,6 +11,8 @@ class Radio:
         self.__url = ''
         self.__instance = vlc.Instance('--input-repeat=-1', '--fullscreen')
         self.__player = self.__instance.media_player_new()
+        self.__player.audio_set_volume(50)
+        self.__volume = self.__player.audio_get_volume()
         self.__media = None
         self.__id = None
         self.__title = ''
