@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import vlc
 import time
-import asyncio
 
 
 class Radio:
@@ -37,6 +36,10 @@ class Radio:
             print('error:', e)
             return 0
 
+    @property
+    def title(self):
+        return self.__title
+
     @station.setter
     def station(self, station: dict):
         self.__id = station["id"]
@@ -63,7 +66,9 @@ class Radio:
         '''
         try:
             if self.__url:
-                    self.__media = self.__instance.media_new(self.__url)
+                self.__media = self.__instance.media_new(self.__url)
+            else:
+                return
             self.__player.set_media(self.__media)
             self.__isplaying = True
             self.__player.play()

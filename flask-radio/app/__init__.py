@@ -22,7 +22,7 @@ def create_app(config_name):
     from .radio import radio_api as radio_blueprint
     app.register_blueprint(radio_blueprint, url_prefix='/api/radio')
 
-    #from .setting import setting as setting_blueprint
-    #app.register_blueprint(setting_blueprint, url_prefix='/setting')
+    from .youtube import youtube_api as youtube_blueprint
+    app.register_blueprint(youtube_blueprint, url_prefix='/api/youtube')
 
     return app

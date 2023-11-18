@@ -11,7 +11,7 @@ import time
 from . import radio_api
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-r = Radio()
+R = Radio()
 #CORS(radio, supports_credentials=True)
 
 @radio_api.route('/')
@@ -27,22 +27,24 @@ def play():
         url = info['url']
         if '' in [title, url]:
             raise ValueError('Empty name or url')
-        r.station = {"id": _id, "title": title, "url": url, "volume": r.volume}
-        r.play()
-        socketio.emit("onReceivePlayingNow", r.station)
-        socketio.emit("onReceiveCurrentStation", r.station)
+        if url != R.url and title != R.title:
+            # only reset station if new station is different from the current one
+            R.station = {"id": _id, "title": title, "url": url, "volume": R.volume}
+        R.play()
+        socketio.emit("onReceivePlayingNow", R.station)
+        socketio.emit("onReceiveCurrentStation", R.station)
         return jsonify(success=True)
     except Exception as e:
         print('error:', e)
-        socketio.emit("onReceivePlayingNow", {})
-        socketio.emit("onReceiveCurrentStation", {})
+        socketio.emit("onReceivePlayingNow", {"volume": R.volume})
+        socketio.emit("onReceiveCurrentStation", {"volume": R.volume})
         return jsonify(success=False)
 
 @radio_api.route('/stop', methods=['GET'])
 def stop():
     try:
-        if r.isplaying:
-            r.pause()
+        if R.isplaying:
+            R.pause()
         socketio.emit("onReceivePlayingNow", {})
         return jsonify(success=True)
     except Exception as e:
@@ -53,13 +55,13 @@ def stop():
 def set_volume():
     try:
         info = request.json
-        r.volume = int(info['volume'])
+        R.volume = int(info['volume'])
         time.sleep(0.1)
-        socketio.emit("onReceiveCurrentStation", r.station)
+        socketio.emit("onReceiveCurrentStation", R.station)
         return jsonify(success=True)
     except Exception as e:
         print('error:', e)
-        socketio.emit("onReceiveCurrentStation", r.station)
+        socketio.emit("onReceiveCurrentStation", R.station)
         return jsonify(success=False)
 
 @radio_api.route('/stations', methods=['GET'])
@@ -90,18 +92,18 @@ def all_stations_socket():
 
 @socketio.on('playing now')
 def playing_now():
-    if r.isplaying:
-        emit("onReceivePlayingNow", r.station)
+    if R.isplaying:
+        emit("onReceivePlayingNow", R.station)
     else:
         emit("onReceivePlayingNow", {})
 
 @socketio.on('current station')
 def current_station():
-    emit('onReceiveCurrentStation', r.station)
+    emit('onReceiveCurrentStation', R.station)
 
 def get_all_stations():
     stations = Station.query.all()
-    r = []
+    result = []
     for s in stations:
-        r.append({'id': s.id, 'name': s.name, 'url': s.url, 'tags': s.tags})
-    return r
+        result.append({'id': s.id, 'name': s.name, 'url': s.url, 'tags': s.tags})
+    return result
