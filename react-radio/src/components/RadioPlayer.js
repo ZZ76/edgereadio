@@ -4,20 +4,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
-import { useStationData } from "../StationProvider";
-import { FaPlay, FaPause, FaVolumeMute, FaVolumeOff, FaVolumeDown, FaVolumeUp } from "react-icons/fa";
+import { useStationData } from "../providers/StationProvider";
+import { FaPlay, FaPause } from "react-icons/fa";
+import VolumeBar from "./VolumeBar";
 
-export default function Player() {
+export default function RadioPlayer() {
     const RADIO_ENDPOINT = process.env.REACT_APP_RADIO_ENDPOINT
     const {playingNow, currentStation} = useStationData();
     const [hoverPlay, setHoverPlay] = useState(false)
-    const [volume, setVolume] = useState(0)
-    const [tempVolume, setTempVolume] = useState(0)
-
-    useEffect(() => {
-        setTempVolume(currentStation.volume);
-        setVolume(currentStation.volume);
-    }, [currentStation.volume])
 
     const play = () => {
         if (currentStation === undefined) {
@@ -45,40 +39,6 @@ export default function Player() {
                 console.log(error);
             })
           .finally(() => {})
-    }
-
-    const mute = () => {
-        setTempVolume(0);
-        updateVolume(0);
-    }
-
-    const updateVolume = (v) => {
-        setTempVolume(v);
-        const requestOptions = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({volume: v})
-        };
-
-        fetch(`${RADIO_ENDPOINT}/set-volume`, requestOptions)
-            .then(setVolume(v))
-            .catch(error => {
-                console.log(error);
-            })
-          .finally(() => {})
-    }
-
-    const VolumeIcon = () => {
-        { if (volume === 0) {
-            return <FaVolumeMute className="red"/>
-        } else if (volume <= 33) {
-            return <FaVolumeOff/>
-        } else if (volume > 33 && volume <= 66) {
-            return <FaVolumeDown/>
-        } else {
-            return <FaVolumeUp/>
-        }
-        }
     }
 
     const PlayButton = () => {
@@ -112,30 +72,6 @@ export default function Player() {
         )
     }
 
-    const Volume = () => {
-        return (
-            <>
-                <Row className="flex-nowrap">
-                    <Col xs={2}>
-                        <Button id="volume-button" variant="dark" onClick={mute} size="sm">
-                            <VolumeIcon/>
-                        </Button>
-                    </Col>
-                    <Col xs={10} style={{"position":"relative"}}>
-                        <input type="range"
-                               id="volume-range"
-                               className="align-middle"
-                               onInput={e => updateVolume(e.target.value)}
-                               value={tempVolume}
-                               style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempVolume + "%, #2b3035 " + tempVolume + "%, #2b3035 100%)"}}
-                               min="0"
-                               max="100"
-                               step="1"/>
-                    </Col>
-                </Row>
-            </>
-        )
-    }
 
     return (
         <>
@@ -163,7 +99,7 @@ export default function Player() {
                                 </Row>
                             </Col>
                         </Row>
-                        <Volume />
+                        <VolumeBar />
                     </Col>
                     <Col xs={0} sm={3}>
                     </Col>

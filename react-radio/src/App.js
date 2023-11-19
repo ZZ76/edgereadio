@@ -9,7 +9,13 @@ import Col from 'react-bootstrap/Col';
 import StationList from "./components/StationList.js";
 import NavbarCustom from './components/Navbar.js';
 
-import Player from "./components/Player";
+import { Routes, Route } from "react-router-dom";
+
+import {
+  Radio,
+  Youtube,
+  Whoops404
+} from "./pages/Pages";
 
 function App() {
 
@@ -20,16 +26,12 @@ function App() {
       </div>
       <div style={{"height": "100%", "width": "100%"}}>
         <Container className="text-bg-dark" style={{"height": "100%", "maxWidth": "100%"}}>
-          <Row id="player-holder">
-            <Player />
-          </Row>
-          <Row id="list-holder">
-            <Col xs={"auto"}>
-            </Col>
-            <StationList />
-            <Col xs={"auto"}>
-            </Col>
-          </Row>
+          <Routes>
+            <Route path="/" element={<Radio />} />
+            <Route path="/radio" element={<Radio />} />
+            <Route path="/youtube" element={<Youtube />} />
+            <Route path="*" element={<Whoops404 />} />
+          </Routes>
         </Container>
       </div>
     </div>

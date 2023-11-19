@@ -1,23 +1,16 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
+import { useSocket } from "./SocketProvider";
 
 const StationContext = createContext();
 export const useStationData = () => useContext(StationContext);
 
-export default function StationProvider ({children, socket}) {
-    const [isConnected, setIsConnected] = useState(socket.connected);
+export default function StationProvider ({children}) {
+    const { socket, isConnected } = useSocket();
     const [stations, setStations] = useState({stations: []});
     const [playingNow, setPlayingNow] = useState({});
     const [currentStation, setCurrentStation] = useState({});
 
     useEffect(() => {
-        function onConnect() {
-            console.log('connected');
-            setIsConnected(true);
-        }
-        function onDisConnect() {
-            console.log('disconnected');
-            setIsConnected(false);
-        }
         function onReceiveStations(msg) {
             //console.log("msg:", msg);
             setStations(msg);
@@ -28,8 +21,6 @@ export default function StationProvider ({children, socket}) {
         function onReceiveCurrentStation(msg) {
             setCurrentStation(msg);
         }
-        socket.on("connect", onConnect);
-        socket.on("disconnect", onDisConnect);
         socket.on("onReceiveStations", onReceiveStations);
         socket.on("onReceivePlayingNow", onReceivePlayingNow);
         socket.on("onReceiveCurrentStation", onReceiveCurrentStation);
@@ -37,11 +28,6 @@ export default function StationProvider ({children, socket}) {
         socket.emit("playing now");
         socket.emit("current station");
 
-        return () => {
-            socket.off("connect", onConnect);
-            //socket.off("disconnect", onDisConnect);
-            //socket.off("onReceiveStations", onReceiveStations);
-        };
     }, []);
 
     return (

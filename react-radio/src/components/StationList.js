@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import React from "react";
-import { useStationData } from "../StationProvider";
+import { useStationData } from "../providers/StationProvider";
 import Station from "./Station";
 import AddButtonComponent from "./AddButtonComponent";
 

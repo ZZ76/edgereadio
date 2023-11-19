@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { io } from "socket.io-client";
-import StationProvider from "./StationProvider";
+import SocketProvider from "./providers/SocketProvider";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,9 +15,11 @@ const socket = io(SOCKETIO_ENDPOINT);
 
 root.render(
   <React.StrictMode>
-    <StationProvider socket={socket}>
-      <App />
-    </StationProvider>
+    <SocketProvider socket={socket}>
+      <Router>
+        <App />
+      </Router>
+    </SocketProvider>
   </React.StrictMode>
 );
 

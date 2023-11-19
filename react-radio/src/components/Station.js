@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { FaPlay, FaPause, FaEdit } from "react-icons/fa";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useStationData } from "../StationProvider";
+import { useStationData } from "../providers/StationProvider";
 import EditStationModal from "./EditStationModal";
 
 export default function Station({id, name, url, tags}) {

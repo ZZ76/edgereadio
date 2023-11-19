@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaRadio } from "react-icons/fa6";
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function NavbarCustom({
     show,
@@ -13,14 +14,21 @@ export default function NavbarCustom({
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
           {/*<Button variant="dark" onClick={handleClose}>Btn</Button>*/}
-          <Navbar.Brand href="#home" className="d-inline-block align-middle">
-            <FaRadio className="d-inline-block align-top brand-icon"/>
-          </Navbar.Brand>
+          <LinkContainer to="/">
+            <Navbar.Brand href="#home" className="d-inline-block align-middle">
+              <FaRadio className="d-inline-block align-top brand-icon"/>
+            </Navbar.Brand>
+          </LinkContainer>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-      {/*<Nav.Link href="#setting">Setting</Nav.Link>*/}
+              <LinkContainer to="/radio">
+                <Nav.Link>Radio</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/youtube">
+                <Nav.Link>Youtube</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,0 +1,27 @@
+#position-range{
+  width: 100%;
+  appearance: auto;
+  accent-color: MediumSpringGreen;
+  border-radius: 8px;
+  background: linear-gradient(to right, #00FA9A 0%, #00FA9A 100%);
+  border-radius: 8px;
+  -webkit-appearance: none;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: 0px; /* Centers thumb on the track */
+   background-color: transparent;
+   height: 0.5rem;
+   width: 0.5rem;
+   border-radius: 0.5rem;
+}

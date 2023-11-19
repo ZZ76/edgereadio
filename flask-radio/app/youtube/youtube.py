@@ -133,8 +133,10 @@ def socket_disconnect():
 
 @socketio.on('Youtube Media')
 def playing_now():
+    print('media')
     socketio.emit('onReceive Youtube Media', Y.media_info)
 
 @socketio.on('Youtube Player')
 def current_station():
+    print('player')
     socketio.emit('onReceive Youtube Player', Y.player_info)
