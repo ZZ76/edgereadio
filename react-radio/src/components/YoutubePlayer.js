@@ -6,12 +6,21 @@ import PlayButtons from "./youtubeplayer/PlayButtons";
 import ProgressBar from "./youtubeplayer/ProgressBar";
 import VolumeBar from "./youtubeplayer/VolumeBar";
 import "./youtubeplayer/youtubeplayer.css";
+import { useSocket } from "../providers/SocketProvider";
 
 export default function RadioPlayer() {
     const {player, media} = useYoutubeData();
+    const {socket} = useSocket();
 
     useEffect(() => {
     }, [media.title, player.isplaying]);
+
+    useEffect(() => {
+        const updatePlayer = setInterval(() => {
+            socket.emit("Realtime Player");
+        }, 1000);
+        return () => clearInterval(updatePlayer);
+    }, []);
 
     return (
         <>

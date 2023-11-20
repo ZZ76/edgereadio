@@ -7,8 +7,30 @@ from .. import socketio
 from .youtube_audio_vlc import YoutubeAudioPlayer
 import time
 from . import youtube_api
+import asyncio
 
+is_connected = False
 Y = YoutubeAudioPlayer()
+A = None
+last_time = time.time()
+
+def update_player_info():
+    global A
+    c = 0
+    print('created async function')
+    while is_connected == True:
+        c += 1
+        if not Y.isplaying:
+            break
+        try:
+            print('update')
+            print(A)
+            print(c)
+            socketio.emit('onReceive Youtube Player', Y.player_info)
+            time.sleep(1)
+        except Exception as e:
+            print(e)
+            break
 
 @youtube_api.route('/')
 def index():
@@ -152,3 +174,11 @@ def playing_now():
 @socketio.on('Youtube Player')
 def current_station():
     socketio.emit('onReceive Youtube Player', Y.player_info)
+
+@socketio.on('Realtime Player')
+def realtime_player():
+    global last_time
+    current_time = time.time()
+    if current_time - last_time > 0.5:
+        last_time = current_time
+        socketio.emit('onReceive Youtube Player', Y.player_info)
