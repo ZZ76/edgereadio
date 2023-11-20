@@ -64,7 +64,7 @@ export default function VolumeBar() {
 
     return (
         <>
-            <Row className="flex-nowrap">
+            <Row style={{"width":"95%"}} className="flex-nowrap">
                 <Col xs={2}>
                     <Button id="volume-button" variant="dark" onClick={mute} size="sm">
                         <VolumeIcon id="volume-button"/>

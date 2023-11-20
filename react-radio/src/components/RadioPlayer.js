@@ -84,7 +84,7 @@ export default function RadioPlayer() {
                         <Row>
                             <br />
                         </Row>
-                        <Row>
+                        <Row style={{"padding-bottom": "10px"}}>
                             <Col xs={2}>
                                 <PlayButton/>
                             </Col>
@@ -100,7 +100,9 @@ export default function RadioPlayer() {
                                 </Row>
                             </Col>
                         </Row>
-                        <VolumeBar />
+                        <Row  className="align-items-center justify-content-center">
+                            <VolumeBar />
+                        </Row>
                     </Col>
                     <Col xs={0} sm={3}>
                     </Col>

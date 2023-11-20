@@ -3,10 +3,14 @@
 }
 
 .player-paused {
+  height: 30px;
+  width: 30px;
 }
 
 .player-playing {
   color: #00FA9A;
+  height: 30px;
+  width: 30px;
 }
 
 .playing {

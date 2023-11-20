@@ -16,7 +16,9 @@ export default function YoutubePage() {
 
     const {media} = useYoutubeData();
     const OpenInBrowser = () => {
+        if (media.url !== "") {
         window.open(media.url, "_blank");
+        }
     }
 
     return (
