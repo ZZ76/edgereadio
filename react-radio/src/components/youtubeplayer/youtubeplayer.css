@@ -65,6 +65,16 @@
     overflow-x: auto;
 }
 
+.url-button-holder{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.url-button{
+  height: 15px;
+  width: 15px;
+}
+
 .pop-holder{
   width: 80%;
 }

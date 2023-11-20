@@ -28,20 +28,20 @@ export default function UrlInput() {
         <>
             <Container className="url-input align-items-center justify-content-center">
                 <Form>
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <Button onClick={handleShow} size="sm" variant="custom">
-                                    <FaEdit />
-                                </Button>
-                            </InputGroup.Text>
-                            <Form.Control placeholder={url} disabled/>
-                            <InputGroup.Text>
-                                <Button size="sm" variant="custom" onClick={() => copy(url)}>
-                                    <FaCopy />
-                                    {" Copy"}
-                                </Button>
-                            </InputGroup.Text>
-                        </InputGroup>
+                    <InputGroup>
+                        <InputGroup.Text className="url-button-holder align-items-center justify-content-center">
+                            <Button onClick={handleShow} size="sm" variant="custom">
+                                <FaEdit className="url-button" />
+                            </Button>
+                        </InputGroup.Text>
+                        <Form.Control placeholder={url} disabled size="sm"/>
+                        <InputGroup.Text className="url-button-holder align-items-center justify-content-center">
+                            <Button size="sm" variant="custom" onClick={() => copy(url)}>
+                                <FaCopy className="url-button" />
+                                {" Copy"}
+                            </Button>
+                        </InputGroup.Text>
+                    </InputGroup>
                 </Form>
             </Container>
             <UrlModal {...{url: "", defaultUrl: url, showModal:showModal, setShowModal:setShowModal}} />
