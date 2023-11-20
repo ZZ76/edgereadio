@@ -1,0 +1,33 @@
+.player-holder {
+  background-color: #212529;
+  position: sticky;
+  top: 58px;
+  border-bottom: 22px solid #212529;
+}
+
+.custom-modal {
+  color: #FFFFFF;
+  background-color: #212529;
+}
+
+.modal-content {
+  color: #FF00FF;
+  background-color: #000000;
+}
+
+.modal {
+  --bs-modal-bg: #212529;
+}
+
+#volume-button {
+  padding: 4px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.title {
+  color: #696969;
+  background-color: #212529;
+  position: sticky;
+  top: 180px;
+}

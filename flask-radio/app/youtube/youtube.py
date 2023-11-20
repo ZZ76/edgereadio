@@ -14,22 +14,36 @@ Y = YoutubeAudioPlayer()
 def index():
     return '<html><p>Hello from Youtube api!</p></html>'
 
-@youtube_api.route('/play', methods=['POST'])
+@youtube_api.route('/play', methods=['POST', 'GET'])
 def play():
-    try:
-        info = request.json
-        url = info['url']
-        if '' in [url]:
-            raise ValueError('Empty name or url')
-        Y.site = url
-        Y.play()
-        return jsonify(success=True)
-    except Exception as e:
-        print('error:', e)
-        return jsonify(success=False)
-    finally:
-        socketio.emit('onReceive Youtube Media', Y.media_info)
-        socketio.emit('onReceive Youtube Player', Y.player_info)
+    if request.method == 'POST':
+        try:
+            info = request.json
+            url = info['url']
+            if '' in [url]:
+                raise ValueError('Empty name or url')
+            Y.site = url
+            Y.play()
+            result = True
+        except Exception as e:
+            print('error:', e)
+            result = False
+        finally:
+            time.sleep(0.2)
+            socketio.emit('onReceive Youtube Media', Y.media_info)
+            socketio.emit('onReceive Youtube Player', Y.player_info)
+            return jsonify(success=result)
+    else:
+        try:
+            Y.play()
+            result = True
+        except Exception as e:
+            print('error:', e)
+            result = False
+        finally:
+            socketio.emit('onReceive Youtube Media', Y.media_info)
+            socketio.emit('onReceive Youtube Player', Y.player_info)
+            return jsonify(success=result)
 
 
 @youtube_api.route('/stop', methods=['GET'])
@@ -133,10 +147,8 @@ def socket_disconnect():
 
 @socketio.on('Youtube Media')
 def playing_now():
-    print('media')
     socketio.emit('onReceive Youtube Media', Y.media_info)
 
 @socketio.on('Youtube Player')
 def current_station():
-    print('player')
     socketio.emit('onReceive Youtube Player', Y.player_info)

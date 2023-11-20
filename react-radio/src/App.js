@@ -24,6 +24,7 @@ function App() {
       <div id="navbar-holder">
         <NavbarCustom/>
       </div>
+
       <div style={{"height": "100%", "width": "100%"}}>
         <Container className="text-bg-dark" style={{"height": "100%", "maxWidth": "100%"}}>
           <Routes>

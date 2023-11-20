@@ -8,9 +8,17 @@ import { useYoutubeData } from "../../providers/YoutubeProvider";
 export default function ProgressBar() {
     const YOUTUBE_ENDPOINT = process.env.REACT_APP_YOUTUBE_ENDPOINT
     const {media, player} = useYoutubeData();
-    const [position, setPosition] = useState(0)
     const [tempPosition, setTempPosition] = useState(0)
     const [barLock, setBarLock] = useState(false)
+
+    useEffect(() => {
+        if (barLock === false) {
+            setTempPosition(player.position*100);
+        }
+        if (player.position === undefined) {
+            setTempPosition(0);
+        }
+    }, [player.position])
 
     const updatePosition = (p) => {
         const requestOptions = {
@@ -20,7 +28,7 @@ export default function ProgressBar() {
         };
 
         fetch(`${YOUTUBE_ENDPOINT}/set-position`, requestOptions)
-            .then(setPosition(p))
+            .then()
             .catch(error => {
                 console.log(error);
             })
@@ -39,8 +47,6 @@ export default function ProgressBar() {
     // onInput={e => updatePosition(e.target.value)}
     // onInput={e => setTempPosition(e.target.value)}
     return (
-        <>
-            <Row className="flex-nowrap">
                 <input type="range"
                        id="position-range"
                        className="align-middle"
@@ -54,7 +60,5 @@ export default function ProgressBar() {
                        min="0"
                        max="100"
                        step="0.1"/>
-            </Row>
-        </>
     )
 }

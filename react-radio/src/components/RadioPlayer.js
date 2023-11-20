@@ -6,7 +6,9 @@ import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
 import { useStationData } from "../providers/StationProvider";
 import { FaPlay, FaPause } from "react-icons/fa";
-import VolumeBar from "./VolumeBar";
+import VolumeBar from "./radioplayer/VolumeBar";
+import "./components.css";
+import "./radioplayer/radioplayer.css";
 
 export default function RadioPlayer() {
     const RADIO_ENDPOINT = process.env.REACT_APP_RADIO_ENDPOINT
@@ -75,13 +77,12 @@ export default function RadioPlayer() {
 
     return (
         <>
-            <Container className="border-0 flex-nowrap align-items-center justify-content-center" fluid="xs">
-                <Row className="w-100 text-center flex-nowrap align-items-center justify-content-center player">
+                <Row className="radio-player w-100 text-center flex-nowrap align-items-center justify-content-center">
                     <Col xs={0} sm={3}>
                     </Col>
                     <Col xs={12} sm={5}>
                         <Row>
-                            <p></p>
+                            <br />
                         </Row>
                         <Row>
                             <Col xs={2}>
@@ -104,7 +105,6 @@ export default function RadioPlayer() {
                     <Col xs={0} sm={3}>
                     </Col>
                 </Row>
-            </Container>
         </>
     )
 }

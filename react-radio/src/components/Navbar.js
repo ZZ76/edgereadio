@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaRadio } from "react-icons/fa6";
 import { LinkContainer } from "react-router-bootstrap";
+import "./components.css";
 
 export default function NavbarCustom({
     show,
@@ -12,7 +13,7 @@ export default function NavbarCustom({
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
+        <Container id="navbar-container">
           {/*<Button variant="dark" onClick={handleClose}>Btn</Button>*/}
           <LinkContainer to="/">
             <Navbar.Brand href="#home" className="d-inline-block align-middle">

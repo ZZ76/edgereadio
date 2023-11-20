@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { useStationData } from "../providers/StationProvider";
+import { useStationData } from "../../providers/StationProvider";
 import { FaVolumeMute, FaVolumeOff, FaVolumeDown, FaVolumeUp } from "react-icons/fa";
 
 export default function VolumeBar() {
@@ -59,7 +59,6 @@ export default function VolumeBar() {
 
     const onMouseUp_ = (v) => {
         setBarLock(false);
-        console.log(v);
         updateVolume(v);
     }
 
@@ -68,7 +67,7 @@ export default function VolumeBar() {
             <Row className="flex-nowrap">
                 <Col xs={2}>
                     <Button id="volume-button" variant="dark" onClick={mute} size="sm">
-                        <VolumeIcon/>
+                        <VolumeIcon id="volume-button"/>
                     </Button>
                 </Col>
                 <Col xs={10} style={{"position":"relative"}}>

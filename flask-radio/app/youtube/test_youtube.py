@@ -6,7 +6,9 @@ Y = YoutubeAudioPlayer()
 
 Y.site = url
 
-#print(Y.site)
+print(Y.site.keys())
+print(Y.site['thumbnail'])
+print(Y.site['webpage_url'])
 
 print('duration:', Y.duration)
 Y.play()

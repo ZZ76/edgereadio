@@ -107,20 +107,20 @@ export default function EditStationModal({id, name, url, tags, showModal, setSho
                 <Modal.Body
                     className="custom-modal"
                     variant="dark"
-                    >
+                >
                     <Container variant="dark" data-bs-theme="dark">
-                    <Row>
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control ref={titleRef} type="text" placeholder="Title" defaultValue={name}/>
-                    </Row>
-                    <Row>
-                        <Form.Label>Tags</Form.Label>
-                        <Form.Control ref={tagsRef} type="text" placeholder="tags"  defaultValue={tags}/>
-                    </Row>
-                    <Row>
-                        <Form.Label>Url</Form.Label>
-                        <Form.Control ref={urlRef} type="text" placeholder="url" defaultValue={url}/>
-                    </Row>
+                        <Row>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control ref={titleRef} type="text" placeholder="Title" defaultValue={name}/>
+                        </Row>
+                        <Row>
+                            <Form.Label>Tags</Form.Label>
+                            <Form.Control ref={tagsRef} type="text" placeholder="tags"  defaultValue={tags}/>
+                        </Row>
+                        <Row>
+                            <Form.Label>Url</Form.Label>
+                            <Form.Control ref={urlRef} type="text" placeholder="url" defaultValue={url}/>
+                        </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer

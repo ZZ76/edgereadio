@@ -14,7 +14,7 @@ export default function RadioPage() {
 
     return (
         <>
-            <Row id="player-holder">
+            <Row className="player-holder">
                 <RadioPlayer />
             </Row>
             <Row id="list-holder">

@@ -33,9 +33,6 @@ export default function StationList() {
 
     return (
         <Container className="border-0 align-items-center justify-content-center">
-          <Row>
-              <br />
-          </Row>
           <Row className="title">
             <Col xs={2} md={3}>
             </Col>

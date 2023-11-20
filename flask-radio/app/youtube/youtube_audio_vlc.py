@@ -29,6 +29,7 @@ class YoutubeAudioPlayer:
         self.__description = ''
         self.__current_time = 0
         self.__position = 0
+        self.__thumbnail = ''
 
 
     @property
@@ -45,6 +46,9 @@ class YoutubeAudioPlayer:
 
     @property
     def isplaying(self):
+        if self.__player.get_state().value == 6:
+            self.__player.stop()
+            self.__isplaying = False
         return self.__isplaying
 
     @property
@@ -76,6 +80,7 @@ class YoutubeAudioPlayer:
         info['url'] = self.__site_url
         info['title'] = self.__title
         info['description'] = self.__description
+        info['thumbnail'] = self.__thumbnail
         return info
 
     @property
@@ -95,6 +100,7 @@ class YoutubeAudioPlayer:
     def site(self, site_url: str):
         '''
         set new url
+        update variables
         if is playing: stop then play new url
         '''
         if site_url == self.site_url:
@@ -110,6 +116,7 @@ class YoutubeAudioPlayer:
             self.__title = self.site['title']
             self.__duration = self.site['duration']
             self.__description = self.site['description']
+            self.__thumbnail = self.site['thumbnail']
 
             self.__media = self.__instance.media_new(self.audio_url)
             self.__player.set_media(self.__media)
@@ -133,6 +140,7 @@ class YoutubeAudioPlayer:
         self.__description = ''
         self.__current_time = 0
         self.__position = 0
+        self.__thumbnail = ''
 
     def set_site(self, site_url: str):
         '''
