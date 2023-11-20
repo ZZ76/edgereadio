@@ -62,6 +62,7 @@
     text-align: left;
     max-height: 350px;
     font-size: 0.9em;
+    overflow-x: auto;
 }
 
 .pop-holder{

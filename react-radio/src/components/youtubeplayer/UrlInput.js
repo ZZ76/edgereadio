@@ -28,7 +28,7 @@ export default function UrlInput() {
         <>
             <Container className="url-input align-items-center justify-content-center">
                 <Form>
-                        <InputGroup className="mb-14">
+                        <InputGroup>
                             <InputGroup.Text>
                                 <Button onClick={handleShow} size="sm" variant="custom">
                                     <FaEdit />
@@ -44,7 +44,7 @@ export default function UrlInput() {
                         </InputGroup>
                 </Form>
             </Container>
-            <UrlModal {...{url:url, showModal:showModal, setShowModal:setShowModal}} />
+            <UrlModal {...{url: "", defaultUrl: url, showModal:showModal, setShowModal:setShowModal}} />
         </>
     )
 }

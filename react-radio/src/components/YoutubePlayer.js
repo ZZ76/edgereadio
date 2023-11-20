@@ -13,7 +13,7 @@ export default function RadioPlayer() {
     const {socket} = useSocket();
 
     useEffect(() => {
-    }, [media.title, player.isplaying]);
+    }, [media.url, player]);
 
     useEffect(() => {
         const updatePlayer = setInterval(() => {

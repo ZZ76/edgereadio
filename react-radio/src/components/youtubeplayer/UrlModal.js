@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import { FaCheck, FaTimes } from "react-icons/fa";
 import Spinner from 'react-bootstrap/Spinner';
 
-export default function EditStationModal({url, showModal, setShowModal = f => f}) {
+export default function EditStationModal({url, defaultUrl, showModal, setShowModal = f => f}) {
     const YOUTUBE_ENDPOINT = process.env.REACT_APP_YOUTUBE_ENDPOINT
     const [confirm, setConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -20,6 +20,10 @@ export default function EditStationModal({url, showModal, setShowModal = f => f}
 
     const submit = () => {
         setLoading(true);
+        if (urlRef.current.value === "") {
+            setLoading(false);
+            handleClose();
+        }
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
