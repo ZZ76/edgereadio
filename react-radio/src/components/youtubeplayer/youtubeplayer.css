@@ -64,6 +64,8 @@
     font-size: 0.9em;
     overflow-x: auto;
     background-color: #2b3035;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .url-button-holder{

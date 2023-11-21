@@ -78,7 +78,7 @@ export default function EditStationModal({url, defaultUrl, showModal, setShowMod
                 <Modal.Header
                     className="custom-modal"
                     data-bs-theme="dark" closeButton>
-                    <Modal.Title>Set url</Modal.Title>
+                    <Modal.Title>URL</Modal.Title>
                 </Modal.Header>
                 <Modal.Body
                     className="custom-modal"
@@ -87,7 +87,7 @@ export default function EditStationModal({url, defaultUrl, showModal, setShowMod
                     <Container variant="dark" data-bs-theme="dark">
                         <Row>
                             <Form.Label></Form.Label>
-                            <Form.Control ref={urlRef} type="text" placeholder={"url"} defaultValue={url}/>
+                            <Form.Control autoFocus ref={urlRef} type="text" placeholder={"url"} defaultValue={url}/>
                         </Row>
                     </Container>
                 </Modal.Body>

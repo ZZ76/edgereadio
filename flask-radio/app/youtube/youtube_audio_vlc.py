@@ -81,6 +81,7 @@ class YoutubeAudioPlayer:
         info['title'] = self.__title
         info['description'] = self.__description
         info['thumbnail'] = self.__thumbnail
+        info['duration'] = self.__duration
         return info
 
     @property

@@ -37,7 +37,7 @@ export default function RadioPlayer() {
                         {media.title}
                     </p>
                 </Row>
-                <Row style={{"height": "60px"}} className="align-items-center justify-content-center">
+                <Row style={{"height": "50px", "paddingTop": "10px"}} className="align-items-center justify-content-center">
                     <ProgressBar />
                 </Row>
                 <Row style={{"height": "80px"}} className="align-items-center justify-content-center">

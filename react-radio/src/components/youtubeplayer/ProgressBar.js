@@ -10,15 +10,37 @@ export default function ProgressBar() {
     const {media, player} = useYoutubeData();
     const [tempPosition, setTempPosition] = useState(0)
     const [barLock, setBarLock] = useState(false)
+    const [currentTime, setCurrentTime] = useState(false)
 
     useEffect(() => {
         if (barLock === false) {
             setTempPosition(player.position*100);
+            setCurrentTime(secondsToHms(player.current_time/1000));
         }
         if (player.position === undefined) {
             setTempPosition(0);
         }
     }, [player.position])
+
+    const checkColon = (d) => {
+        var c = d > 0 ? ":" : "";
+        return c
+    }
+
+    const secondsToHms = (d) => {
+        if (d === null || d < 0) {
+            return "00:00"
+        }
+        d = Number(d);
+        var h = Math.floor(d / 3600);
+        var m = Math.floor(d % 3600 / 60);
+        var s = Math.floor(d % 3600 % 60);
+
+        var hDisplay = h > 0 ? String(h).padStart(2, "0") : "";
+        var mDisplay = String(m).padStart(2, "0");
+        var sDisplay = String(s).padStart(2, "0");
+        return hDisplay  + checkColon(h) +  mDisplay + ":" + sDisplay;
+    }
 
     const updatePosition = (p) => {
         const requestOptions = {
@@ -35,6 +57,17 @@ export default function ProgressBar() {
           .finally(() => {})
     }
 
+    const updateCurrentTime = (p) => {
+        if (barLock === true) {
+            setCurrentTime(secondsToHms(media.duration * p/100));
+        }
+    }
+
+    const setPositionAndCurrentTime = (p) => {
+        setTempPosition(p);
+        updateCurrentTime(p);
+    }
+
     const onMouseDown_ = () => {
         setBarLock(true);
     }
@@ -47,18 +80,25 @@ export default function ProgressBar() {
     // onInput={e => updatePosition(e.target.value)}
     // onInput={e => setTempPosition(e.target.value)}
     return (
-                <input type="range"
-                       id="position-range"
-                       className="align-middle"
-                       value={tempPosition}
-                       onInput={e => setTempPosition(e.target.value)}
-                       onMouseDown={onMouseDown_}
-                       onMouseUp={e => onMouseUp_(e.target.value)}
-                       onTouchStart={onMouseDown_}
-                       onTouchEnd={e => onMouseUp_(e.target.value)}
-                       style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempPosition + "%, #2b3035 " + tempPosition + "%, #2b3035 100%)"}}
-                       min="0"
-                       max="100"
-                       step="0.1"/>
+        <>
+            <input type="range"
+                   id="position-range"
+                   className="align-middle"
+                   value={tempPosition}
+                   onInput={e => setPositionAndCurrentTime(e.target.value)}
+                   onMouseDown={onMouseDown_}
+                   onMouseUp={e => onMouseUp_(e.target.value)}
+                   onTouchStart={onMouseDown_}
+                   onTouchEnd={e => onMouseUp_(e.target.value)}
+                   style={{"background":"linear-gradient(to right, #00FA9A 0%, #00FA9A " + tempPosition + "%, #2b3035 " + tempPosition + "%, #2b3035 100%)"}}
+                   min="0"
+                   max="100"
+                   step="0.1"/>
+            <Row>
+                <Col xs={1} style={{"padding": "0"}}>{currentTime}</Col>
+                <Col></Col>
+                <Col xs={1} style={{"padding": "0"}}>{secondsToHms(media.duration)}</Col>
+            </Row>
+        </>
     )
 }

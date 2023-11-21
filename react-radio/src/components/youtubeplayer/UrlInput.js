@@ -34,7 +34,7 @@ export default function UrlInput() {
                                 <FaEdit className="url-button" />
                             </Button>
                         </InputGroup.Text>
-                        <Form.Control placeholder={url} disabled size="sm"/>
+                        <Form.Control onClick={handleShow}  placeholder={url} readOnly size="sm"/>
                         <InputGroup.Text className="url-button-holder align-items-center justify-content-center">
                             <Button size="sm" variant="custom" onClick={() => copy(url)}>
                                 <FaCopy className="url-button" />
