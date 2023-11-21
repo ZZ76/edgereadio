@@ -40,7 +40,7 @@ export default function RadioPlayer() {
                 <Row style={{"height": "60px"}} className="align-items-center justify-content-center">
                     <ProgressBar />
                 </Row>
-                <Row style={{"height": "80px", "maxWidth": "900px"}} className="align-items-center justify-content-center">
+                <Row style={{"height": "80px"}} className="align-items-center justify-content-center">
                         <PlayButtons />
                 </Row>
                 <Row style={{"height": "80px"}} className="align-items-center justify-content-center">

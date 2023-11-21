@@ -101,7 +101,7 @@ export default function ProgressBar() {
 
     return (
         <>
-            <Row style={{"height": "60px", "width": "95%"}}>
+            <Row style={{"height": "60px", "width": "95%", "maxWidth": "900px"}}>
                 <Col xs={0} sm={1}>
                 </Col>
                 <Col xs={4} sm={3}>

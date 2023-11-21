@@ -1,6 +1,6 @@
 ## Before build
 1. Edit `REACT_APP_BASE_URL` in `.env.prudoction`. Use ip address e.g. `http://192.168.1.2:5000` instead use `localhost`.
-2. Select the suitable base docker image for nginx and set in `Dockerfile`
+2. Check Linux distribution with `cat /etc/*-release`. Then select the suitable base docker image for nginx and set in `Dockerfile`
 
 ## Build react project locally
 
