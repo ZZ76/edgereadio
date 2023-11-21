@@ -22,7 +22,7 @@ export default function YoutubeContent() {
                     </h5>
                 </Row>
                 <Row className="youtube-thumbnail">
-                    <Image src={media.thumbnail} fluid/>
+                    <Image style={{"padding":"0"}} src={media.thumbnail} fluid/>
                 </Row>
                 <Row>
                     <p className="content-description">
