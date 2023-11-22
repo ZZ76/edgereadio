@@ -69,16 +69,22 @@
 }
 
 .url-button-holder{
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .url-button{
-  height: 15px;
-  width: 15px;
+    height: 15px;
+    width: 15px;
 }
 
 .pop-holder{
+    top: 393px;
+    position: sticky;
+    background-color: #212529;
+}
+
+.pop-container{
   width: 80%;
 }
 

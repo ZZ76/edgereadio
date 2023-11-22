@@ -25,13 +25,11 @@ export default function YoutubePage() {
             <Row className="player-holder">
                 <YoutubePlayer />
             </Row>
-            <Row className="spacer">
-            </Row>
             <Row className="url-holder">
                     <UrlInput />
             </Row>
-            <Row>
-                <Container className="pop-holder">
+            <Row className="pop-holder">
+                <Container className="pop-container">
                     <Button className="pop-open" size="sm" variant="custom" onClick={OpenInBrowser}>
                         <MdOutlineOpenInNew />
                         {"  Open in browser"}
