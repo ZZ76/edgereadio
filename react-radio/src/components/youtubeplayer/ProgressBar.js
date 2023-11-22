@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import './youtubeplayer.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from "react-bootstrap/Container";
 import { useYoutubeData } from "../../providers/YoutubeProvider";
 
 export default function ProgressBar() {
     const YOUTUBE_ENDPOINT = process.env.REACT_APP_YOUTUBE_ENDPOINT
     const {media, player} = useYoutubeData();
-    const [tempPosition, setTempPosition] = useState(0)
-    const [barLock, setBarLock] = useState(false)
-    const [currentTime, setCurrentTime] = useState(false)
+    const [tempPosition, setTempPosition] = useState(0);
+    const [barLock, setBarLock] = useState(false);
+    const [currentTime, setCurrentTime] = useState(false);
+    const [durationTextWidth, setDurationTextWidth] = useState(5);
+    const durationColRef = useRef(null);
 
     useEffect(() => {
         if (barLock === false) {
@@ -21,6 +22,25 @@ export default function ProgressBar() {
             setTempPosition(0);
         }
     }, [player.position])
+
+    useEffect(() => {
+        adjustText();
+        window.addEventListener("resize", adjustText);
+        return () => window.removeEventListener("resize", adjustText);
+    }, [])
+
+    const adjustText = () => {
+        var canvas =  document.createElement("canvas");
+        var context = canvas.getContext("2d");
+        var {width} = context.measureText(secondsToHms(media.duration));
+        if (width > durationColRef.current.clientWidth) {
+            //console.log("text:" + width);
+            //console.log("Col:" + durationColRef.current.clientWidth);
+            setDurationTextWidth(2*Math.floor((durationColRef.current.clientWidth - width)/2));
+        } else {
+            setDurationTextWidth(0);
+        }
+    }
 
     const checkColon = (d) => {
         var c = d > 0 ? ":" : "";
@@ -77,8 +97,6 @@ export default function ProgressBar() {
         updatePosition(p);
     }
 
-    // onInput={e => updatePosition(e.target.value)}
-    // onInput={e => setTempPosition(e.target.value)}
     return (
         <>
             <input type="range"
@@ -97,7 +115,11 @@ export default function ProgressBar() {
             <Row>
                 <Col xs={1} style={{"padding": "0"}}>{currentTime}</Col>
                 <Col></Col>
-                <Col xs={1} style={{"padding": "0"}}>{secondsToHms(media.duration)}</Col>
+                <Col style={{padding: "0"}} ref={durationColRef} xs={1}>
+                    <p style={{marginLeft: durationTextWidth, padding: "0"}}>
+                        {secondsToHms(media.duration)}
+                    </p>
+                </Col>
             </Row>
         </>
     )

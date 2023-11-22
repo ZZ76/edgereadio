@@ -7,12 +7,37 @@ from .. import socketio
 from .youtube_audio_vlc import YoutubeAudioPlayer
 import time
 from . import youtube_api
-import asyncio
+
+class YoutubeUpdater():
+
+    is_connected = False
+    is_running = False
+
+    def __init__(self, Y):
+        self.Y = Y
+
+    def main(self):
+        if self.is_running:
+            return
+        else:
+            self.is_running = True
+        while self.is_connected:
+            print('updating')
+            socketio.emit('onReceive Youtube Player', self.Y.player_info)
+            time.sleep(1)
+        self.is_running = False
+
+    def start(self):
+        self.is_connected = True
+        self.main()
+
+    def stop(self):
+        self.is_connected = False
 
 is_connected = False
 Y = YoutubeAudioPlayer()
-A = None
 last_time = time.time()
+#YU = YoutubeUpdater(Y)
 
 def update_player_info():
     global A
@@ -157,6 +182,16 @@ def back10():
         socketio.emit('onReceive Youtube Media', Y.media_info)
         socketio.emit('onReceive Youtube Player', Y.player_info)
 
+#@youtube_api.route('/test-start', methods=['GET'])
+#def test_start():
+#    print(YU)
+#    YU.start()
+#    return {'test': str(YU)}
+#
+#@youtube_api.route('/test-stop', methods=['GET'])
+#def test_stop():
+#    YU.stop()
+#    return {'test': str(YU)}
 
 @socketio.on('connect')
 def socket_connect():

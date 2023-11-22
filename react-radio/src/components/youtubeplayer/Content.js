@@ -25,9 +25,14 @@ export default function YoutubeContent() {
                     <Image style={{"padding":"0"}} src={media.thumbnail} fluid/>
                 </Row>
                 <Row>
-                    <p className="content-description">
-                        {media.description}
-                    </p>
+                    {
+                        media.description ?
+                            <p className="content-description">
+                                {media.description}
+                            </p>
+                        :
+                        <></>
+                    }
                 </Row>
             </Container>
         </>

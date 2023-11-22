@@ -2,7 +2,6 @@ import React from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
 import { MdOutlineOpenInNew } from "react-icons/md";
 
@@ -16,8 +15,8 @@ export default function YoutubePage() {
 
     const {media} = useYoutubeData();
     const OpenInBrowser = () => {
-        if (media.url !== "") {
-        window.open(media.url, "_blank");
+        if (media.url) {
+            window.open(media.url, "_blank");
         }
     }
 

@@ -84,7 +84,7 @@ export default function RadioPlayer() {
                         <Row>
                             <br />
                         </Row>
-                        <Row style={{"padding-bottom": "10px"}}>
+                        <Row style={{"paddingBottom": "10px"}}>
                             <Col xs={2}>
                                 <PlayButton/>
                             </Col>
